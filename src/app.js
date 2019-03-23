@@ -8,16 +8,17 @@ const forecast = require('./utils/forecast.js');
 // console.log(__dirname);
 // console.log(path.join(__dirname, '../public'));
 
+const app = express();
+const port =  process.env.PORT || 3000; // first value is for heroku; if doesn't exist, use port 3000
 
 // Define paths for Express config
-const app = express();
 const publicDirectoryPath = path.join(__dirname, '../public');
 const viewsPath = path.join(__dirname, '../templates/views');
 const partialPath = path.join(__dirname, '../templates/partials');
 
 // Setup handlebars engine and views location
 app.set('view engine','hbs');
-app.set('views', viewsPath)
+app.set('views', viewsPath);
 hbs.registerPartials(partialPath);
 
 // Setup static directory to serve
@@ -109,9 +110,13 @@ app.get('*', (req, res) => { // * is a wildcard, needs to be the last app.get re
     })
 })
 
-app.listen(3000, () => { // .listen starts up the app server
-    console.log('Server is up on port 3000.');
+app.listen(port, () => { // .listen starts up the app server
+    console.log('Server is up on port ' + port);
 }); 
+
+// app.listen(3000, () => { // .listen starts up the app server
+//     console.log('Server is up on port 3000.');
+// }); 
 
 // app.get('', (req, res) => {   // will not be run anymore since statement in line 12 will overwrite with index.html page
 //     res.send('<h1>Weather<h1>');
