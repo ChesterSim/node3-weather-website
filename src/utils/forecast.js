@@ -10,8 +10,8 @@ const forecast = (latitude, longitude, callback) => {
         } else {
             const temp = response.body.currently.temperature;   
             const rain = response.body.currently.precipProbability;
-            const tempHigh = response.body.currently.temperatureHigh;
-            const tempLow = response.body.daily.temperatureLow;
+            const tempHigh = response.body.daily.data[0].temperatureHigh;
+            const tempLow = response.body.daily.data[0].temperatureLow;
             callback(undefined, response.body.daily.data[0].summary + " It is curently " + temp + " degrees out. There is a " + rain 
                 + "% change of rain. The highest temperature today would be " + tempHigh 
                 + " degrees while the lowest would be " + tempLow + " degrees.")
